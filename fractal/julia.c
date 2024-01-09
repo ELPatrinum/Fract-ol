@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:09:35 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:13:45 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void run_julia(t_data fl, double *j_x, double *j_y)
 	julia.julia_x = j_x;
 	julia.julia_y = j_y;
 	generate_julia(fl, julia);
-	mlx_key_hook(fl.mlx, (mlx_keyfunc)close_wnd, fl.mlx);
+	mlx_key_hook(fl.mlx, (mlx_keyfunc)my_input, fl.mlx);
 	mlx_loop(fl.mlx);
 	mlx_terminate(fl.mlx);
 }

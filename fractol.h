@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:54:14 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:02:55 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:58:23 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ double	ft_atoi(const char *str);
 bool	is_valid(char *s1, char *s2);
 //=============_fractal_tools_==================
 void	init_fractal(mlx_t* mlx, mlx_image_t **image);
-void	close_wnd(mlx_key_data_t keydata, mlx_t* mlx);
+void	my_input(mlx_key_data_t keydata, t_data *fl);
 //=============_Mandelbrot_==================
-void run_mandelbrot(t_data fl);
+void run_mandelbrot(t_data *fl);
+void	generate_mandelbrot(t_data *fl);
 //=============_Julia_==================
 void run_julia(t_data fl, double *j_x, double *j_y);
 

@@ -6,13 +6,13 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 14:08:49 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:08:30 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:18:57 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static void	mandelbrot_formula(t_data fl, int x, int y)
+static void	mandelbrot_formula(t_data *fl, int x, int y)
 {
 	double	cx;
 	double	cy;
@@ -21,11 +21,11 @@ static void	mandelbrot_formula(t_data fl, int x, int y)
 	int		  iteration;
 	t_color color;
 	double	temp;
-
-	cx = (x - WIDTH / 2) * (*fl.zm_ix)/ WIDTH;
-	cy = (y - HEIGHT / 2) * (*fl.zm_ix)/ WIDTH;
-	zx = (x - WIDTH / 2) * (*fl.zm_ix)/ WIDTH;
-	zy = (y - HEIGHT / 2) * (*fl.zm_ix)/ WIDTH;
+	
+	cx = (x - WIDTH / 2) * (*(fl->zm_ix))/ WIDTH;
+	cy = (y - HEIGHT / 2) * (*(fl->zm_ix))/ WIDTH;
+	zx = (x - WIDTH / 2) * (*(fl->zm_ix))/ WIDTH;
+	zy = (y - HEIGHT / 2) * (*(fl->zm_ix))/ WIDTH;
 	iteration = 0;
 	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
 	{
@@ -35,10 +35,10 @@ static void	mandelbrot_formula(t_data fl, int x, int y)
 		iteration++;
 	}
 	color = generate_color(iteration);
-	mlx_put_pixel(fl.img, x, y, (color.red << 16) | (color.green << 8) | color.blue);
+	mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);
 }
 
-static void	generate_mandelbrot(t_data fl)
+void	generate_mandelbrot(t_data *fl)
 {
 	int	y;
 	int	x;
@@ -54,13 +54,12 @@ static void	generate_mandelbrot(t_data fl)
 		}
 		y++;
 	}
-	mlx_image_to_window(fl.mlx, fl.img, WIDTH, HEIGHT);
 }
 
-void run_mandelbrot(t_data fl)
+void run_mandelbrot(t_data *fl)
 {
 	generate_mandelbrot(fl);
-	mlx_key_hook(fl.mlx, (mlx_keyfunc)close_wnd, fl.mlx);
-	mlx_loop(fl.mlx);
-	mlx_terminate(fl.mlx);
+	mlx_key_hook(fl->mlx, (mlx_keyfunc)my_input, fl);
+	mlx_loop(fl->mlx);
+	mlx_terminate(fl->mlx);
 }

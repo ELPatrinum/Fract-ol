@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 12:01:05 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:09:17 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:46:18 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int main(int ac, char **av)
 		if (!(fl.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 1)))
 			return (puts(mlx_strerror(mlx_errno)), 1);
 		init_fractal(fl.mlx, &fl.img);
-		run_mandelbrot(fl);
+		run_mandelbrot(&fl);
 	}
 	else if (ac == 4 && !ft_strncmp(av[1], "Julia", 5) && is_valid(av[2], av[3]))
 	{
-		if (!(fl.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 1)))
-			return (puts(mlx_strerror(mlx_errno)), 1);
+		
 		j_x = ft_atoi(av[2]);
 		j_y = ft_atoi(av[3]);
 		init_fractal(fl.mlx, &fl.img);
