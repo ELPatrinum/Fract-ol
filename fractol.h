@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:54:14 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/07 18:28:15 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:02:55 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ bool	is_valid(char *s1, char *s2);
 void	init_fractal(mlx_t* mlx, mlx_image_t **image);
 void	close_wnd(mlx_key_data_t keydata, mlx_t* mlx);
 //=============_Mandelbrot_==================
-void run_mandelbrot(mlx_t *mlx, mlx_image_t **image);
+void run_mandelbrot(t_data fl);
 //=============_Julia_==================
-void run_julia(mlx_t *mlx, mlx_image_t **image, double *j_x, double *j_y);
+void run_julia(t_data fl, double *j_x, double *j_y);
 
 typedef struct s_julia
 {

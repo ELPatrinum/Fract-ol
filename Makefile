@@ -6,7 +6,7 @@
 #    By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 13:10:17 by muel-bak          #+#    #+#              #
-#    Updated: 2024/01/07 16:16:13 by muel-bak         ###   ########.fr        #
+#    Updated: 2024/01/09 17:54:43 by muel-bak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS = ${SRCS:.c=.o}
 
 LIBMLX = ./MLX42
 HEADERS = -I $(LIBMLX)/include
-LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm -L"/Users/$(USER)/goinfre/homebrew/opt/glfw/lib/"
+LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm -L"/Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.9/lib/"
 
 
 all: $(NAME) clean

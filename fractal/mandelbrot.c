@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 14:08:49 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/07 18:27:11 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:04:45 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	mandelbrot_formula(void *img_ptr, int x, int y)
 	mlx_put_pixel(img_ptr, x, y, (color.red << 16) | (color.green << 8) | color.blue);
 }
 
-static void	generate_mandelbrot(void *mlx_ptr, void *img_ptr)
+static void	generate_mandelbrot(t_data fl)
 {
 	int	y;
 	int	x;
@@ -49,18 +49,18 @@ static void	generate_mandelbrot(void *mlx_ptr, void *img_ptr)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mandelbrot_formula(img_ptr, x, y);
+			mandelbrot_formula(fl.img, x, y);
 			x++;
 		}
 		y++;
 	}
-	mlx_image_to_window(mlx_ptr, img_ptr, WIDTH, HEIGHT);
+	mlx_image_to_window(fl.mlx, fl.img, WIDTH, HEIGHT);
 }
 
-void run_mandelbrot(mlx_t *mlx, mlx_image_t **image)
+void run_mandelbrot(t_data fl)
 {
-	generate_mandelbrot(mlx, *image);
-	mlx_key_hook(mlx, (mlx_keyfunc)close_wnd, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	generate_mandelbrot(fl);
+	mlx_key_hook(fl.mlx, (mlx_keyfunc)close_wnd, fl.mlx);
+	mlx_loop(fl.mlx);
+	mlx_terminate(fl.mlx);
 }
