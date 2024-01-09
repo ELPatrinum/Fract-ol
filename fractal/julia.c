@@ -6,13 +6,13 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:05:35 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:07:29 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static void	julia_formula(void *img_ptr, int x, int y, t_julia julia)
+static void	julia_formula(t_data fl, int x, int y, t_julia julia)
 {
 	double	cx;
 	double	cy;
@@ -35,7 +35,7 @@ static void	julia_formula(void *img_ptr, int x, int y, t_julia julia)
 		iteration++;
 	}
 	color = generate_color(iteration);
-	mlx_put_pixel(img_ptr, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
+	mlx_put_pixel(fl.img, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
 }
 
 static void	generate_julia(t_data fl, t_julia julia)
@@ -49,7 +49,7 @@ static void	generate_julia(t_data fl, t_julia julia)
 		x = 0;
 		while (x < WIDTH)
 		{
-			julia_formula(fl.img, x, y, julia);
+			julia_formula(fl, x, y, julia);
 			x++;
 		}
 		y++;

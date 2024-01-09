@@ -6,13 +6,13 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 14:08:49 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:04:45 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:07:22 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static void	mandelbrot_formula(void *img_ptr, int x, int y)
+static void	mandelbrot_formula(t_data fl, int x, int y)
 {
 	double	cx;
 	double	cy;
@@ -35,7 +35,7 @@ static void	mandelbrot_formula(void *img_ptr, int x, int y)
 		iteration++;
 	}
 	color = generate_color(iteration);
-	mlx_put_pixel(img_ptr, x, y, (color.red << 16) | (color.green << 8) | color.blue);
+	mlx_put_pixel(fl.img, x, y, (color.red << 16) | (color.green << 8) | color.blue);
 }
 
 static void	generate_mandelbrot(t_data fl)
@@ -49,7 +49,7 @@ static void	generate_mandelbrot(t_data fl)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mandelbrot_formula(fl.img, x, y);
+			mandelbrot_formula(fl, x, y);
 			x++;
 		}
 		y++;
