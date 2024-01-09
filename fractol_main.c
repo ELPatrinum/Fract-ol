@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 12:01:05 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:02:34 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:09:17 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ int main(int ac, char **av)
 	t_data fl;
 	double		j_x;
 	double		j_y;
+	double		ix;
 
 	fl.img = NULL;
+	ix = 4.0;
+	fl.zm_ix = &ix;
 	if (ac == 2 && !ft_strncmp(av[1], "Mandelbrot", 10))
 	{
 		if (!(fl.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", 1)))

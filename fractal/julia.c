@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:07:29 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:09:35 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	julia_formula(t_data fl, int x, int y, t_julia julia)
 
 	cx = *(julia.julia_x);
 	cy = *(julia.julia_y);
-	zx = (x - WIDTH / 2) * 4.0 / WIDTH;
-	zy = (y - HEIGHT / 2) * 4.0 / WIDTH;
+	zx = (x - WIDTH / 2) * (*fl.zm_ix) / WIDTH;
+	zy = (y - HEIGHT / 2) * (*fl.zm_ix) / WIDTH;
 	iteration = 0;
 	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
 	{
