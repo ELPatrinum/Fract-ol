@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 14:08:49 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 20:18:57 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:32:03 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	generate_mandelbrot(t_data *fl)
 void run_mandelbrot(t_data *fl)
 {
 	generate_mandelbrot(fl);
-	mlx_key_hook(fl->mlx, (mlx_keyfunc)my_input, fl);
+	mlx_key_hook(fl->mlx, (mlx_keyfunc)ky_input, fl);
+	mlx_scroll_hook(fl->mlx, (mlx_scrollfunc)scroll_input, fl);
 	mlx_loop(fl->mlx);
 	mlx_terminate(fl->mlx);
 }

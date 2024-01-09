@@ -6,7 +6,7 @@
 #    By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 13:10:17 by muel-bak          #+#    #+#              #
-#    Updated: 2024/01/09 17:54:43 by muel-bak         ###   ########.fr        #
+#    Updated: 2024/01/09 22:10:47 by muel-bak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ RM = rm -f
 NAME = fractol
 SRCS = ./fractol_main.c \
 	   ./fractal/fractal_init.c ./fractal/mandelbrot.c ./fractal/julia.c ./fractal/clolors.c \
+	   ./fractal/zoom.c \
 	   ./input/eroor.c ./input/ft_atoi.c ./input/string_functions.c
 
 OBJS = ${SRCS:.c=.o}

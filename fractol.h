@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:54:14 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:58:23 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:24:08 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ t_color generate_color(int iteration);
 
 typedef struct s_data
 {
-  mlx_t *mlx;
-  mlx_image_t *img;
-  double *zm_ix;
+	mlx_t *mlx;
+	mlx_image_t *img;
+	double *zm_ix;
+	int check;
+	double	julia_x;
+	double	julia_y;
 } t_data;
 
 //=============_helping_finctions_==============
@@ -52,17 +55,15 @@ double	ft_atoi(const char *str);
 bool	is_valid(char *s1, char *s2);
 //=============_fractal_tools_==================
 void	init_fractal(mlx_t* mlx, mlx_image_t **image);
-void	my_input(mlx_key_data_t keydata, t_data *fl);
+void	ky_input(mlx_key_data_t keydata, t_data *fl);
+void	scroll_input(double xdelta, double ydelta, t_data *fl);
+void	zoom_out(t_data *fl);
+void	zoom_in(t_data *fl);
 //=============_Mandelbrot_==================
 void run_mandelbrot(t_data *fl);
 void	generate_mandelbrot(t_data *fl);
 //=============_Julia_==================
-void run_julia(t_data fl, double *j_x, double *j_y);
-
-typedef struct s_julia
-{
-	double	*julia_x;
-	double	*julia_y;
-}	t_julia;
+void run_julia(t_data *fl);
+void	generate_julia(t_data *fl);
 
 #endif

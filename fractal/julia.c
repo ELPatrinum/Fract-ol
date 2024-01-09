@@ -6,13 +6,13 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 18:13:45 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:32:07 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static void	julia_formula(t_data fl, int x, int y, t_julia julia)
+static void	julia_formula(t_data *fl, int x, int y)
 {
 	double	cx;
 	double	cy;
@@ -22,10 +22,10 @@ static void	julia_formula(t_data fl, int x, int y, t_julia julia)
   t_color		color;
 	double	temp;
 
-	cx = *(julia.julia_x);
-	cy = *(julia.julia_y);
-	zx = (x - WIDTH / 2) * (*fl.zm_ix) / WIDTH;
-	zy = (y - HEIGHT / 2) * (*fl.zm_ix) / WIDTH;
+	cx = fl->julia_x;
+	cy = fl->julia_y;
+	zx = (x - WIDTH / 2) * (*(fl->zm_ix)) / WIDTH;
+	zy = (y - HEIGHT / 2) * (*(fl->zm_ix)) / WIDTH;
 	iteration = 0;
 	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
 	{
@@ -35,10 +35,10 @@ static void	julia_formula(t_data fl, int x, int y, t_julia julia)
 		iteration++;
 	}
 	color = generate_color(iteration);
-	mlx_put_pixel(fl.img, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
+	mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
 }
 
-static void	generate_julia(t_data fl, t_julia julia)
+void	generate_julia(t_data *fl)
 {
 	int	y;
 	int	x;
@@ -49,22 +49,18 @@ static void	generate_julia(t_data fl, t_julia julia)
 		x = 0;
 		while (x < WIDTH)
 		{
-			julia_formula(fl, x, y, julia);
+			julia_formula(fl, x, y);
 			x++;
 		}
 		y++;
 	}
-	mlx_image_to_window(fl.mlx, fl.img, WIDTH, HEIGHT);
 }
 
-void run_julia(t_data fl, double *j_x, double *j_y)
+void run_julia(t_data *fl)
 {
-	t_julia julia;
-
-	julia.julia_x = j_x;
-	julia.julia_y = j_y;
-	generate_julia(fl, julia);
-	mlx_key_hook(fl.mlx, (mlx_keyfunc)my_input, fl.mlx);
-	mlx_loop(fl.mlx);
-	mlx_terminate(fl.mlx);
+	generate_julia(fl);
+	mlx_key_hook(fl->mlx, (mlx_keyfunc)ky_input, fl);
+	mlx_scroll_hook(fl->mlx, (mlx_scrollfunc)scroll_input, fl);
+	mlx_loop(fl->mlx);
+	mlx_terminate(fl->mlx);
 }
