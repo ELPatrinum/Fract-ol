@@ -6,54 +6,46 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 14:08:49 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 22:32:03 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:13:08 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static void	mandelbrot_formula(t_data *fl, int x, int y)
+static int mandelbrot_formula(t_data *fl, double x, double y)
 {
-	double	cx;
-	double	cy;
-	double	zx;
-	double	zy;
-	int		  iteration;
-	t_color color;
-	double	temp;
-	
-	cx = (x - WIDTH / 2) * (*(fl->zm_ix))/ WIDTH;
-	cy = (y - HEIGHT / 2) * (*(fl->zm_ix))/ WIDTH;
-	zx = (x - WIDTH / 2) * (*(fl->zm_ix))/ WIDTH;
-	zy = (y - HEIGHT / 2) * (*(fl->zm_ix))/ WIDTH;
-	iteration = 0;
-	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
-	{
-		temp = zx * zx - zy * zy + cx;
-		zy = 2 * zx * zy + cy;
-		zx = temp;
-		iteration++;
-	}
-	color = generate_color(iteration);
-	mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);
+    (void)fl;
+    double zx = 0.0;
+    double zy = 0.0;
+    int iteration = 0;
+
+    while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
+    {
+        double temp = zx * zx - zy * zy + x;
+        zy = 2 * zx * zy + y;
+        zx = temp;
+        iteration++;
+    }
+    return iteration;
 }
 
-void	generate_mandelbrot(t_data *fl)
+void generate_mandelbrot(t_data *fl)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			mandelbrot_formula(fl, x, y);
-			x++;
-		}
-		y++;
-	}
+	t_color color;
+    int y = 0;
+    while (y < HEIGHT)
+    {
+        int x = 0;
+        while (x < WIDTH)
+        {
+            double n_x = scale_it(x, fl) + fl->ofst_x;
+            double n_y = scale_it(y, fl) + fl->ofst_y;
+            color = generate_color(mandelbrot_formula(fl, n_x, n_y), fl);
+            mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);
+            x++;
+        }
+        y++;
+    }
 }
 
 void run_mandelbrot(t_data *fl)

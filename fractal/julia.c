@@ -6,26 +6,27 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/09 22:32:07 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:13:43 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static void	julia_formula(t_data *fl, int x, int y)
+static int	julia_formula(t_data *fl, double x, double y)
 {
 	double	cx;
 	double	cy;
 	double	zx;
 	double	zy;
 	int		iteration;
-  t_color		color;
 	double	temp;
 
+	(void)x;
+	(void)y;
 	cx = fl->julia_x;
 	cy = fl->julia_y;
-	zx = (x - WIDTH / 2) * (*(fl->zm_ix)) / WIDTH;
-	zy = (y - HEIGHT / 2) * (*(fl->zm_ix)) / WIDTH;
+	zx = x;
+	zy = y;
 	iteration = 0;
 	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
 	{
@@ -34,12 +35,12 @@ static void	julia_formula(t_data *fl, int x, int y)
 		zx = temp;
 		iteration++;
 	}
-	color = generate_color(iteration);
-	mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
+	return (iteration);
 }
 
 void	generate_julia(t_data *fl)
 {
+	t_color	color;
 	int	y;
 	int	x;
 
@@ -49,7 +50,10 @@ void	generate_julia(t_data *fl)
 		x = 0;
 		while (x < WIDTH)
 		{
-			julia_formula(fl, x, y);
+			double n_x = scale_it(x, fl) + fl->ofst_x;
+            double n_y = scale_it(y, fl) + fl->ofst_y;
+			color = generate_color(julia_formula(fl, n_x, n_y), fl);
+			mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
 			x++;
 		}
 		y++;
