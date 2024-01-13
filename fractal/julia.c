@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/13 15:13:43 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:27:03 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	generate_julia(t_data *fl)
 	int	x;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < fl->hight)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < fl->width)
 		{
-			double n_x = scale_it(x, fl) + fl->ofst_x;
-            double n_y = scale_it(y, fl) + fl->ofst_y;
+            double n_x = scale_it(x, fl, 'x') + fl->ofst_x;
+            double n_y = scale_it(y, fl, 'y') + fl->ofst_y;
 			color = generate_color(julia_formula(fl, n_x, n_y), fl);
 			mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
 			x++;

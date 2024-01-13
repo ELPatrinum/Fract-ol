@@ -6,7 +6,7 @@
 #    By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 13:10:17 by muel-bak          #+#    #+#              #
-#    Updated: 2024/01/10 18:18:06 by muel-bak         ###   ########.fr        #
+#    Updated: 2024/01/13 17:47:22 by muel-bak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM = rm -f
 NAME = fractol
 SRCS = ./fractol_main.c \
 	   ./fractal/fractal_init.c ./fractal/mandelbrot.c ./fractal/julia.c ./fractal/clolors.c \
-	   ./fractal/zoom.c \
+	   ./fractal/hook_function.c \
 	   ./input/eroor.c ./input/ft_atoi.c ./input/string_functions.c
 
 OBJS = ${SRCS:.c=.o}
@@ -27,7 +27,7 @@ HEADERS = -I $(LIBMLX)/include
 LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm -L"/Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.9/lib/"
 
 
-all: $(NAME) clean
+all: $(NAME)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
