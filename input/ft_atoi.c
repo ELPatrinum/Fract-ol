@@ -40,25 +40,17 @@ static double	calc_result(double tmp, double result, char c, int sign)
 	return (tmp);
 }
 
-double	ft_atoi(const char *str)
+static void	ft_helper(const char *str, int *result, int *sign, int *tmp)
 {
-	int		i;
-	int		sign;
-	double	result;
-	double	tmp;
+	int	i;
 
-	if (!str)
-		return (0);
 	i = 0;
-	sign = 1;
-	result = 0;
-	tmp = 0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			sign *= -1;
+			*sign *= -1;
 		i++;
 	}
 	while (str[i] && ((str[i] >= '0' && str[i] <= '9') || str[i] == '.'))
@@ -67,10 +59,24 @@ double	ft_atoi(const char *str)
 			i++;
 		else
 		{
-			result = calc_result(tmp, result, str[i], sign);	
+			*result = calc_result(*tmp, r*esult, str[i], *sign);	
 			i++;
 		}
 	}
+}
+
+double	ft_atoi(const char *str)
+{
+	int		sign;
+	double	result;
+	double	tmp;
+
+	if (!str)
+		return (0);
+	sign = 1;
+	result = 0;
+	tmp = 0;
+	ft_helper(str, &result, &sign, &tmp);
 	result = result * sign;
 	if (d_v(str))
 		result = (result / (pow(10, d_v(str))));

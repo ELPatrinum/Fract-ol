@@ -66,18 +66,17 @@ bool	is_valid(char *s1, char *s2);
 void	init_fractal(mlx_t* mlx, mlx_image_t **image, t_data *fl);
 void	ky_input(mlx_key_data_t keydata, t_data *fl);
 void	scroll_input(double xdelta, double ydelta, t_data *fl);
-double scale_it(int coord, t_data *fl, char c);
+double	scale_it(int coord, t_data *fl, char c);
 void	mlx_resize_fn(int32_t width, int32_t height, t_data *fl);
+void	re_gen(t_data *fl);
 //=============_Mandelbrot_==================
-void run_mandelbrot(t_data *fl);
+void	run_mandelbrot(t_data *fl);
 void	generate_mandelbrot(t_data *fl);
-void	re_gen(t_data *fl);;
 //=============_Julia_==================
-void run_julia(t_data *fl);
+void	run_julia(t_data *fl);
 void	generate_julia(t_data *fl);
-
-
-
-void generate_burning_ship(t_data *fl)
+//=============_BUrningg_ship_==================
+void	run_burning_ship(t_data *fl);
+void	generate_burning_ship(t_data *fl)
 
 #endif

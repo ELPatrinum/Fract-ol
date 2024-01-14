@@ -21,8 +21,6 @@ static int	julia_formula(t_data *fl, double x, double y)
 	int		iteration;
 	double	temp;
 
-	(void)x;
-	(void)y;
 	cx = fl->julia_x;
 	cy = fl->julia_y;
 	zx = x;
@@ -41,8 +39,10 @@ static int	julia_formula(t_data *fl, double x, double y)
 void	generate_julia(t_data *fl)
 {
 	t_color	color;
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	double	n_x;
+	double	n_y;
 
 	y = 0;
 	while (y < fl->hight)
@@ -50,17 +50,18 @@ void	generate_julia(t_data *fl)
 		x = 0;
 		while (x < fl->width)
 		{
-            double n_x = scale_it(x, fl, 'x') + fl->ofst_x;
-            double n_y = scale_it(y, fl, 'y') + fl->ofst_y;
+			n_x = scale_it(x, fl, 'x') + fl->ofst_x;
+			n_y = scale_it(y, fl, 'y') + fl->ofst_y;
 			color = generate_color(julia_formula(fl, n_x, n_y), fl);
-			mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8) | color.blue);  
+			mlx_put_pixel(fl->img, x, y, (color.red << 16) |
+							 (color.green << 8) | color.blue);  
 			x++;
 		}
 		y++;
 	}
 }
 
-void run_julia(t_data *fl)
+void	run_julia(t_data *fl)
 {
 	generate_julia(fl);
 	mlx_key_hook(fl->mlx, (mlx_keyfunc)ky_input, fl);

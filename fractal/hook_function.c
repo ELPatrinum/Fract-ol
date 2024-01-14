@@ -45,10 +45,10 @@ void	ky_input_2(mlx_key_data_t keydata, t_data *fl)
 
 void	zoom_hand(mlx_key_data_t keydata, t_data *fl)
 {
-	int32_t tempx;
-	int32_t tempy;
-	double mx_bfr;
-	double my_bfr;
+	int32_t	tempx;
+	int32_t	tempy;
+	double	mx_bfr;
+	double	my_bfr;
 
 	mlx_get_mouse_pos(fl->mlx, &tempx, &tempy);
 	mx_bfr = scale_it((double)tempx, fl, 'x');
@@ -63,10 +63,10 @@ void	zoom_hand(mlx_key_data_t keydata, t_data *fl)
 
 void	scroll_input(double xdelta, double ydelta, t_data *fl)
 {
-	int32_t tempx;
-	int32_t tempy;
-	double mx_bfr;
-	double my_bfr;
+	int32_t	tempx;
+	int32_t	tempy;
+	double	mx_bfr;
+	double	my_bfr;
 
 	(void)xdelta;
 	mlx_get_mouse_pos(fl->mlx, &tempx, &tempy);

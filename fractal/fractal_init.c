@@ -36,10 +36,12 @@ void	init_fractal(mlx_t *mlx, mlx_image_t **image, t_data *fl)
 	}
 }
 
-double scale_it(int coord,t_data *fl, char c)
+double	scale_it(int coord,t_data *fl, char c)
 {
 	if (c == 'x')
-    	return ((-2) * fl->zm_ix + ((2 * fl->zm_ix) - ((-2) * fl->zm_ix)) * (coord - 0) / (fl->width - 0));
+		return ((-2) * fl->zm_ix + ((2 * fl->zm_ix) - ((-2) * fl->zm_ix))
+				 * (coord - 0) / (fl->width - 0));
 	else
-    	return ((-2) * fl->zm_ix + ((2 * fl->zm_ix) - ((-2) * fl->zm_ix)) * (coord - 0) / (fl->hight - 0));
+		return ((-2) * fl->zm_ix + ((2 * fl->zm_ix) - ((-2) * fl->zm_ix))
+				 * (coord - 0) / (fl->hight - 0));
 }
