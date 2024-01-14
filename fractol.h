@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include <math.h>
 # include "MLX42/include/MLX42/MLX42.h"
-#define START "\
+# define START "\
 ┏┓┳┓┏┓┏┓┏┳┓┏┓┓ \n\
 ┣ ┣┫┣┫┃  ┃ ┃┃┃ \n\
 ┻ ┛┗┛┗┗┛ ┻ ┗┛┗┛\n\
@@ -55,7 +55,6 @@ typedef struct s_data
 	double hight;
 } t_data;
 
-t_color generate_color(int iteration, t_data *fl);
 //=============_helping_finctions_==============
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 void	ft_putstr_fd(char *s, int fd);
@@ -68,6 +67,7 @@ void	ky_input(mlx_key_data_t keydata, t_data *fl);
 void	scroll_input(double xdelta, double ydelta, t_data *fl);
 double	scale_it(int coord, t_data *fl, char c);
 void	mlx_resize_fn(int32_t width, int32_t height, t_data *fl);
+t_color	generate_color(int iteration, t_data *fl);
 void	re_gen(t_data *fl);
 //=============_Mandelbrot_==================
 void	run_mandelbrot(t_data *fl);
