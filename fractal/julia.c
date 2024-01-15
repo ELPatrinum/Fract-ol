@@ -64,6 +64,7 @@ void	run_julia(t_data *fl)
 	generate_julia(fl);
 	mlx_key_hook(fl->mlx, (mlx_keyfunc)ky_input, fl);
 	mlx_scroll_hook(fl->mlx, (mlx_scrollfunc)scroll_input, fl);
+	mlx_resize_hook(fl->mlx, (mlx_resizefunc)mlx_resize_fn, fl);
 	mlx_loop(fl->mlx);
 	mlx_terminate(fl->mlx);
 }
