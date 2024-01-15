@@ -6,13 +6,13 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 19:18:51 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/15 14:56:23 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:56:53 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static int	burning_ship_formula(double x, double y)
+static int	burning_ship_formula(double x, double y, t_data *fl)
 {
 	double	zx;
 	double	zy;
@@ -22,7 +22,7 @@ static int	burning_ship_formula(double x, double y)
 	zx = 0.0;
 	zy = 0.0;
 	iteration = 0;
-	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
+	while (zx * zx + zy * zy <= 4 && iteration < fl->max_it)
 	{
 		temp = fabs(zx * zx - zy * zy + x);
 		zy = fabs(2 * zx * zy + y);
@@ -48,7 +48,7 @@ void	generate_burning_ship(t_data *fl)
 		{
 			n_x = scale_it(x, fl, 'x') + fl->ofst_x;
 			n_y = scale_it(y, fl, 'y') + fl->ofst_y;
-			color = generate_color(burning_ship_formula(n_x, n_y), fl);
+			color = generate_color(burning_ship_formula(n_x, n_y, fl), fl);
 			mlx_put_pixel(fl->img, x, y, (color.red << 16)
 				| (color.green << 8) | color.blue);
 			x++;

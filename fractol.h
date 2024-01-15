@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:54:14 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/15 15:53:36 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:05:21 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@
 # define ERROR_MSG	"To use the program fractol you shoud enter one of these\
  argument:\n\tMandelbort or Julia\n\tand btw julia takes 2 more arguments,\
   \n        wich represent the complex number\n"
-# define BSERROR "the Bonus takes Burning_ship as an argument\n"
-# define MAX_IT 40.0
+# define BSERROR "the Bonus takes Burningship as an argument\n"
 
 typedef struct t_color 
 {
@@ -52,6 +51,7 @@ typedef struct s_data
 	int			color_ix;
 	double		width;
 	double		hight;
+	double		max_it;
 }	t_data;
 
 //=============_helping_finctions_==============

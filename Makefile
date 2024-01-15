@@ -6,7 +6,7 @@
 #    By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 13:10:17 by muel-bak          #+#    #+#              #
-#    Updated: 2024/01/15 14:47:35 by muel-bak         ###   ########.fr        #
+#    Updated: 2024/01/15 16:20:18 by muel-bak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,13 @@ OBJS = $(SRCS:.c=.o) $(MAIN:.c=.o)
 BSOBJS = $(SRCS:.c=.o) $(BSMAIN:.c=.o)
 
 LIBMLX = ./MLX42
-HEADERS = -I $(LIBMLX)/include
+HEADERS = -I$(LIBMLX)/include
 LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm -L"/Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.9/lib/"
 
 
 all: $(NAME)
 
 bonus: $(BSNAME)
-
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 %.o: %.c ./fractol.h
 	@$(CC) -c $(CFLAGS) $< -o $@ $(HEADERS)
@@ -58,4 +55,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, libmlx
+.PHONY: all, clean, fclean, re

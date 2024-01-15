@@ -6,13 +6,13 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 14:08:49 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/15 15:07:21 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:56:21 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static int	mandelbrot_formula(double x, double y)
+static int	mandelbrot_formula(double x, double y, t_data *fl)
 {
 	double	zx;
 	double	zy;
@@ -22,7 +22,7 @@ static int	mandelbrot_formula(double x, double y)
 	zx = 0.0;
 	zy = 0.0;
 	iteration = 0.0;
-	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
+	while (zx * zx + zy * zy <= 4 && iteration < fl->max_it)
 	{
 		temp = zx * zx - zy * zy + x;
 		zy = 2 * zx * zy + y;
@@ -48,7 +48,7 @@ void	generate_mandelbrot(t_data *fl)
 		{
 			n_x = scale_it(x, fl, 'x') + fl->ofst_x;
 			n_y = scale_it(y, fl, 'y') + fl->ofst_y;
-			color = generate_color(mandelbrot_formula(n_x, n_y), fl);
+			color = generate_color(mandelbrot_formula(n_x, n_y, fl), fl);
 			mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8)
 				| color.blue);
 			x++;

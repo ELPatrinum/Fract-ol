@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/15 15:06:10 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:55:16 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	julia_formula(t_data *fl, double x, double y)
 	z[0] = x;
 	z[1] = y;
 	iteration = 0;
-	while (z[0] * z[0] + z[1] * z[1] <= 4 && iteration < MAX_IT)
+	while (z[0] * z[0] + z[1] * z[1] <= 4 && iteration < fl->max_it)
 	{
 		temp = z[0] * z[0] - z[1] * z[1] + c[0];
 		z[1] = 2 * z[0] * z[1] + c[1];

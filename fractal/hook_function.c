@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:07:20 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/15 15:02:03 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:08:22 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	re_gen(t_data *fl)
 void	ky_input_2(mlx_key_data_t keydata, t_data *fl)
 {
 	if (keydata.key == MLX_KEY_UP && keydata.action == 1)
-		fl->ofst_y += 0.05;
+		fl->ofst_y += 0.02;
 	else if (keydata.key == MLX_KEY_DOWN && keydata.action == 1)
-		fl->ofst_y -= 0.05;
+		fl->ofst_y -= 0.02;
 	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == 1)
-		fl->ofst_x -= 0.05;
+		fl->ofst_x -= 0.02;
 	else if (keydata.key == MLX_KEY_LEFT && keydata.action == 1)
-		fl->ofst_x += 0.05;
+		fl->ofst_x += 0.02;
 	re_gen(fl);
 }
 
@@ -55,9 +55,15 @@ void	zoom_hand(mlx_key_data_t keydata, t_data *fl)
 	mx_bfr = scale_it((double)tempx, fl, 'x');
 	my_bfr = scale_it((double)tempy, fl, 'y');
 	if (keydata.key == MLX_KEY_KP_ADD && keydata.action == 1)
+	{
 		fl->zm_ix *= 0.97;
+		fl->max_it += 2;
+	}
 	if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action == 1)
+	{
 		fl->zm_ix *= 1.03;
+		fl->max_it -= 2;
+	}
 	fl->ofst_x += mx_bfr - (scale_it((double)tempx, fl, 'x'));
 	fl->ofst_y += my_bfr - (scale_it((double)tempy, fl, 'y'));
 }
@@ -74,9 +80,15 @@ void	scroll_input(double xdelta, double ydelta, t_data *fl)
 	mx_bfr = scale_it((double)tempx, fl, 'x');
 	my_bfr = scale_it((double)tempy, fl, 'y');
 	if (ydelta <= 0)
+	{
 		fl->zm_ix *= 0.97;
+		fl->max_it += 2;
+	}
 	if (ydelta >= 0)
+	{
 		fl->zm_ix *= 1.03;
+		fl->max_it -= 2;
+	}
 	fl->ofst_x += mx_bfr - (scale_it((double)tempx, fl, 'x'));
 	fl->ofst_y += my_bfr - (scale_it((double)tempy, fl, 'y'));
 	re_gen(fl);
