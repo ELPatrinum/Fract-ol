@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 22:08:41 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/13 17:37:34 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:00:32 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,29 @@ void	mlx_resize_fn(int32_t width, int32_t height, t_data *fl)
 	re_gen(fl);
 }
 
-
 void	init_fractal(mlx_t *mlx, mlx_image_t **image, t_data *fl)
 {
-	if (!(*image = mlx_new_image(mlx, fl->width, fl->hight)))
+	*image = mlx_new_image(mlx, fl->width, fl->hight);
+	if (!(*image))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
-		return;
+		return ;
 	}
 	if (mlx_image_to_window(mlx, *image, 0, 0) == -1)
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
-		return;
+		return ;
 	}
 }
 
-double	scale_it(int coord,t_data *fl, char c)
+double	scale_it(int coord, t_data *fl, char c)
 {
 	if (c == 'x')
 		return ((-2) * fl->zm_ix + ((2 * fl->zm_ix) - ((-2) * fl->zm_ix))
-				 * (coord - 0) / (fl->width - 0));
+			* (coord - 0) / (fl->width - 0));
 	else
 		return ((-2) * fl->zm_ix + ((2 * fl->zm_ix) - ((-2) * fl->zm_ix))
-				 * (coord - 0) / (fl->hight - 0));
+			* (coord - 0) / (fl->hight - 0));
 }

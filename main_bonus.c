@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_main.c                                     :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/07 12:01:05 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/15 15:53:26 by muel-bak         ###   ########.fr       */
+/*   Created: 2024/01/15 14:22:40 by muel-bak          #+#    #+#             */
+/*   Updated: 2024/01/15 15:45:59 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static bool	start_julia(t_data fl, char **av)
 	return (true);
 }
 
+static bool	start_burning(t_data fl)
+{
+	fl.name = 'b';
+	fl.mlx = mlx_init(fl.width, fl.hight, "MLX42", 1);
+	if (!(fl.mlx))
+		return (false);
+	init_fractal(fl.mlx, &fl.img, &fl);
+	run_burning_ship(&fl);
+	return (true);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	fl;
@@ -55,6 +66,11 @@ int	main(int ac, char **av)
 		if (!(start_julia(fl, av)))
 			return (puts(mlx_strerror(mlx_errno)), 1);
 	}
+	else if (ac == 2 && !ft_strncmp(av[1], "Burning_ship", 12))
+	{
+		if (!(start_burning(fl)))
+			return (puts(mlx_strerror(mlx_errno)), 1);
+	}
 	else
-		ft_putstr_fd(ERROR_MSG, 2); 
+		ft_putstr_fd(BSERROR, 2); 
 }

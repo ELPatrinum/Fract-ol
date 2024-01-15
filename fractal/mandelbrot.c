@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 14:08:49 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/13 18:51:48 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:07:21 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	mandelbrot_formula(double x, double y)
 {
 	double	zx;
-	double 	zy;
+	double	zy;
 	int		iteration;
 	double	temp;
 
@@ -44,13 +44,13 @@ void	generate_mandelbrot(t_data *fl)
 	while (y < fl->hight)
 	{
 		x = 0;
-        while (x < fl->width)
-        {
+		while (x < fl->width)
+		{
 			n_x = scale_it(x, fl, 'x') + fl->ofst_x;
 			n_y = scale_it(y, fl, 'y') + fl->ofst_y;
 			color = generate_color(mandelbrot_formula(n_x, n_y), fl);
 			mlx_put_pixel(fl->img, x, y, (color.red << 16) | (color.green << 8)
-							 | color.blue);
+				| color.blue);
 			x++;
 		}
 		y++;

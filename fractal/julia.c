@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 16:02:18 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/13 18:27:03 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:06:10 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 static int	julia_formula(t_data *fl, double x, double y)
 {
-	double	cx;
-	double	cy;
-	double	zx;
-	double	zy;
+	double	c[2];
+	double	z[2];
 	int		iteration;
 	double	temp;
 
-	cx = fl->julia_x;
-	cy = fl->julia_y;
-	zx = x;
-	zy = y;
+	c[0] = fl->julia_x;
+	c[1] = fl->julia_y;
+	z[0] = x;
+	z[1] = y;
 	iteration = 0;
-	while (zx * zx + zy * zy <= 4 && iteration < MAX_IT)
+	while (z[0] * z[0] + z[1] * z[1] <= 4 && iteration < MAX_IT)
 	{
-		temp = zx * zx - zy * zy + cx;
-		zy = 2 * zx * zy + cy;
-		zx = temp;
+		temp = z[0] * z[0] - z[1] * z[1] + c[0];
+		z[1] = 2 * z[0] * z[1] + c[1];
+		z[0] = temp;
 		iteration++;
 	}
 	return (iteration);
@@ -53,8 +51,8 @@ void	generate_julia(t_data *fl)
 			n_x = scale_it(x, fl, 'x') + fl->ofst_x;
 			n_y = scale_it(y, fl, 'y') + fl->ofst_y;
 			color = generate_color(julia_formula(fl, n_x, n_y), fl);
-			mlx_put_pixel(fl->img, x, y, (color.red << 16) |
-							 (color.green << 8) | color.blue);  
+			mlx_put_pixel(fl->img, x, y, (color.red << 16)
+				| (color.green << 8) | color.blue);
 			x++;
 		}
 		y++;

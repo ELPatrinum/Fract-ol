@@ -6,7 +6,7 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:07:20 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/13 19:24:31 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:02:03 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	re_gen(t_data *fl)
 {
 	mlx_delete_image(fl->mlx, fl->img);
-	if (!(fl->img = mlx_new_image(fl->mlx, fl->width, fl->hight)))
+	fl->img = mlx_new_image(fl->mlx, fl->width, fl->hight);
+	if (!(fl->img))
 	{
 		mlx_close_window(fl->mlx);
 		puts(mlx_strerror(mlx_errno));
@@ -26,19 +27,19 @@ void	re_gen(t_data *fl)
 		generate_mandelbrot(fl);
 	else if (fl->name == 'j')
 		generate_julia(fl);
-	else if(fl->name == 'b')
+	else if (fl->name == 'b')
 		generate_burning_ship(fl);
 }
 
 void	ky_input_2(mlx_key_data_t keydata, t_data *fl)
 {
-	if(keydata.key == MLX_KEY_UP && keydata.action == 1)
+	if (keydata.key == MLX_KEY_UP && keydata.action == 1)
 		fl->ofst_y += 0.05;
-	else if(keydata.key == MLX_KEY_DOWN && keydata.action == 1)
+	else if (keydata.key == MLX_KEY_DOWN && keydata.action == 1)
 		fl->ofst_y -= 0.05;
-	else if(keydata.key == MLX_KEY_RIGHT && keydata.action == 1)
+	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == 1)
 		fl->ofst_x -= 0.05;
-	else if(keydata.key == MLX_KEY_LEFT && keydata.action == 1)
+	else if (keydata.key == MLX_KEY_LEFT && keydata.action == 1)
 		fl->ofst_x += 0.05;
 	re_gen(fl);
 }

@@ -6,7 +6,7 @@
 #    By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 13:10:17 by muel-bak          #+#    #+#              #
-#    Updated: 2024/01/13 17:47:22 by muel-bak         ###   ########.fr        #
+#    Updated: 2024/01/15 14:47:35 by muel-bak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,18 @@ CFLAGS = -Wall -Wextra -Werror -O3
 RM = rm -f
 
 NAME = fractol
-SRCS = ./fractol_main.c \
-	   ./fractal/fractal_init.c ./fractal/mandelbrot.c ./fractal/julia.c ./fractal/clolors.c \
-	   ./fractal/hook_function.c \
-	   ./input/eroor.c ./input/ft_atoi.c ./input/string_functions.c
+BSNAME = fractol_bonus
 
-OBJS = ${SRCS:.c=.o}
+SRCS = ./fractal/fractal_init.c ./fractal/mandelbrot.c ./fractal/julia.c ./fractal/clolors.c \
+	   ./fractal/hook_function.c \
+	   ./input/eroor.c ./input/ft_atoi.c ./input/string_functions.c \
+	   ./bonus/burning_ship_bonus.c
+
+MAIN = ./fractol_main.c 
+BSMAIN = ./main_bonus.c
+
+OBJS = $(SRCS:.c=.o) $(MAIN:.c=.o)
+BSOBJS = $(SRCS:.c=.o) $(BSMAIN:.c=.o)
 
 LIBMLX = ./MLX42
 HEADERS = -I $(LIBMLX)/include
@@ -29,20 +35,26 @@ LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -lm -L"/Users/$(USER)/goinfre/.bre
 
 all: $(NAME)
 
+bonus: $(BSNAME)
+
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c ./src/fractol.h
+%.o: %.c ./fractol.h
 	@$(CC) -c $(CFLAGS) $< -o $@ $(HEADERS)
+
+$(BSNAME): $(BSOBJS)
+	@$(CC) $(BSOBJS) $(LIBS) $(HEADERS) -o $(BSNAME)
+
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(BSOBJS)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BSNAME)
 
 re: fclean all
 

@@ -6,21 +6,22 @@
 /*   By: muel-bak <muel-bak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:11:58 by muel-bak          #+#    #+#             */
-/*   Updated: 2024/01/07 17:47:30 by muel-bak         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:48:08 by muel-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../fractol.h"
+#include "../fractol.h"
 
 static int	d_v(const char *str)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
+
 	i = 0;
 	count = 0;
-	while(str[i] && str[i] != '.')
+	while (str[i] && str[i] != '.')
 		i++;
-	if(str[i] == '.')
+	if (str[i] == '.')
 		i++;
 	while (str[i])
 	{
@@ -40,7 +41,7 @@ static double	calc_result(double tmp, double result, char c, int sign)
 	return (tmp);
 }
 
-static void	ft_helper(const char *str, int *result, int *sign, int *tmp)
+static void	ft_helper(const char *str, double *result, int *sign, double *tmp)
 {
 	int	i;
 
@@ -59,7 +60,7 @@ static void	ft_helper(const char *str, int *result, int *sign, int *tmp)
 			i++;
 		else
 		{
-			*result = calc_result(*tmp, r*esult, str[i], *sign);	
+			*result = calc_result(*tmp, *result, str[i], *sign);
 			i++;
 		}
 	}
@@ -77,8 +78,7 @@ double	ft_atoi(const char *str)
 	result = 0;
 	tmp = 0;
 	ft_helper(str, &result, &sign, &tmp);
-	result = result * sign;
 	if (d_v(str))
 		result = (result / (pow(10, d_v(str))));
-	return (result);
+	return (result * sign);
 }
